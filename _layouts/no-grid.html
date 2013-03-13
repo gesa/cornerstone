@@ -1,0 +1,16 @@
+{% include global-doctype.html %}
+<head>
+    {% include global-meta.html %}
+</head>
+<body>
+{% include global-header.html %}
+{% include global-navigation.html %}
+<div id="main-content">
+    <div class="row" id="{{ page.name }}">
+            {{ content }}
+    </div>
+</div>
+{% include global-footer.html %}
+{% include global-scripts.html %}
+</body>
+</html>

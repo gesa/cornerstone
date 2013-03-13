@@ -1,0 +1,95 @@
+@import "_reset.less";
+@import "_variables.less";
+@import "_mixins.less";
+@import "_grid.less";
+
+body {
+    font-family      : @baseFontFamily;
+    font-size        : @baseFontSize;
+    line-height      : @baseLineHeight;
+    position         : relative;
+    ::selection, ::-moz-selection, ::-webkit-selection {
+        background : #ffffff;
+        color      : #000000;
+    }
+}
+a {
+    &:link, &:visited {
+    }
+    &:hover, &:active {
+    }
+}
+p {
+    max-width: 35em;
+}
+ul.inline {
+    display : inline;
+    margin  : 0;
+    padding : 0;
+    li {
+        display : inline;
+        margin  : 0;
+        padding : 0;
+    }
+}
+
+.mq400() {
+}
+.mq500() {
+}
+.mq600() {
+}
+.mq800() {
+}
+.mq900() {
+}
+.mq1200() {
+}
+.mq1500() {
+}
+.mq1800() {
+}
+.at2x() { // retina background images
+}
+// media queries & oldie class will auto-compile
+@media screen and (min-width: 25em) {
+    .mq400
+}
+@media screen and (min-width: 31.25em) {
+    .mq500
+}
+@media screen and (min-width: 37.5em) {
+    .mq600
+}
+@media screen and (min-width: 50em) {
+    .mq800
+}
+@media screen and (min-width: 56.25em) {
+    .mq900
+}
+@media screen and (min-width: 75em) {
+    .mq1200
+}
+@media screen and (min-width: 93.75em) {
+    .mq1500
+}
+@media screen and (min-width: 112.5em) {
+    .mq1800
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    .at2x
+}
+.oldie {
+    .mq400();
+    .mq500();
+    .mq600();
+    .mq800();
+    .mq900();
+}
+@media print {
+    body {
+        font-size      : @baseFontSize * .8;
+        line-height    : @baseLineHeight * .8;
+        padding-bottom : 0;
+    }
+}

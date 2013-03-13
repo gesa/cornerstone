@@ -1,0 +1,148 @@
+@charset "utf-8";
+/*
+ * grid.less
+ * Created by Aki Braun on 2012/10/06
+ * https://github.com/gesa/fluid-to-em-grid
+ * Use as you wish. Not my fault if things break.
+ * Class names inspired by the smart-grid created by Daniel Ryan
+ * (https://github.com/dryan/css-smart-grid/)
+ * v0.2, 2012/10/07
+ */
+
+// container sizes
+@standard : 61.25em;
+@large : 75em;
+@hidef : 100em;
+
+@gutter : 1.25em;
+
+@standardColumn : (@standard    - (@gutter * 11)) / 12;
+// subtract the gutter from cols 2-12, as well as the padding (gutter/2)
+@largeColumn : (@large       - (@gutter * 11)) / 12;
+@hidefColumn : (@hidef       - (@gutter * 11)) / 12;
+
+// Base container class
+.container {
+    clear   : both;
+    margin  : 0 auto;
+    padding : 0 .5em;
+}
+.row:after {
+    content    : ".";
+    clear      : both;
+    display    : block;
+    height     : 0;
+    visibility : hidden;
+}
+.mqCols(@container : @standard, @column : @standardColumn, @gutter : @gutter) {
+    .padding()when (@container < 60em) {
+        padding : 0 .625em;
+    }
+    .padding() {
+    }
+    .container {
+        .padding();
+        width : @container;
+        .columns {
+            float       : left;
+            margin-left : @gutter;
+            width       : @column;
+            &:first-child, &.first {
+                margin-left : 0;
+            }
+            &.two {
+                width : @column * 2 + @gutter;
+            }
+            &.three {
+                width : @column * 3 + @gutter * 2;
+            }
+            &.four {
+                width : @column * 4 + @gutter * 3;
+            }
+            &.five {
+                width : @column * 5 + @gutter * 4;
+            }
+            &.six {
+                width : @column * 6 + @gutter * 5;
+            }
+            &.seven {
+                width : @column * 7 + @gutter * 6;
+            }
+            &.eight {
+                width : @column * 8 + @gutter * 7;
+            }
+            &.nine {
+                width : @column * 9 + @gutter * 8;
+            }
+            &.ten {
+                width : @column * 10 + @gutter * 9;
+            }
+            &.eleven {
+                width : @column * 11 + @gutter * 10;
+            }
+            &.twelve {
+                width : @container;
+            }
+        }
+        .offset-one {
+            padding-left : @column + @gutter;
+        }
+        .offset-two {
+            padding-left : @column * 2 + @gutter;
+        }
+        .offset-three {
+            padding-left : @column * 3 + @gutter * 2;
+        }
+        .offset-four {
+            padding-left : @column * 4 + @gutter * 3;
+        }
+        .offset-five {
+            padding-left : @column * 5 + @gutter * 4;
+        }
+        .offset-six {
+            padding-left : @column * 6 + @gutter * 5;
+        }
+        .offset-seven {
+            padding-left : @column * 7 + @gutter * 6;
+        }
+        .offset-eight {
+            padding-left : @column * 8 + @gutter * 7;
+        }
+        .offset-nine {
+            padding-left : @column * 9 + @gutter * 8;
+        }
+        .offset-ten {
+            padding-left : @column * 10 + @gutter * 9;
+        }
+        .offset-eleven {
+            padding-left : @column * 11 + @gutter * 10;
+        }
+        .offset-twelve {
+            .padding(@container)when (@container = auto) {
+                padding-left : 100%;
+            }
+            .padding(@container)when (isnumber(@container)) {
+                padding-left : @container;
+            }
+            .padding(@container);
+        }
+    }
+}
+@media screen and (min-width: 37.5em) {
+    .mqCols(auto,7.416666667%,1%);
+}
+@media screen and (min-width: 62.5em) {
+    .mqCols(@standard,@standardColumn);
+}
+@media screen and (min-width: 76.25em) {
+    .mqCols(@large,@largeColumn);
+}
+@media screen and (min-width: 101.25em) {
+    .mqCols(@hidef,@hidefColumn);
+}
+html.oldie {
+    .mqCols(@standard, @standardColumn);
+}
+.internal {
+    .mqCols(auto, 7.416666667%, 1%);
+}

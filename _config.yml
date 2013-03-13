@@ -1,0 +1,26 @@
+## so, theoretically, if you set this file up right, you don't need to touch
+## global-meta until some new tag/convention comes out. for example, the new
+## twitter meta (which isn't there yet).
+
+## technical details
+auto: true          # auto regen
+server: true        # run rack server
+server_port: 3000   # on this port
+markdown: rdiscount # choose markdown engine
+
+## additional setup
+exclude: [.gitignore] # '_filename.ext' is also excluded
+permalink: /:categories/:year/:month/:day/:title/
+
+## meta info
+title: ''     # this goes after each page name in title tags and such
+longTitle: '' # this can be used for fb & index page
+gplus: ''     # google plus ID, long numeric string, optional
+url: ''       # include http(s), no trailing slash
+imagePath: '' # relative to root, for social sites
+
+## scripts
+modernizrBuild: '' # lives in /js/libs/, don't forget extension
+jqVersion: '1.9.1'
+
+ga: 'UA-' # google analytics site id

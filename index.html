@@ -1,0 +1,10 @@
+---
+layout: default
+name: home
+description: ""
+---
+{% for post in site.posts limit:5 %}
+<article>
+    {{ post.content }}
+</article>
+{% endfor %}

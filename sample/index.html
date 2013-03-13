@@ -1,0 +1,11 @@
+---
+layout: default
+name: scratch
+---
+{% for post in site.posts %}
+    {%if post.category == 'sample'%}
+    <article>
+        {{ post.content }}
+    </article>
+    {% endif %}
+{% endfor %}
