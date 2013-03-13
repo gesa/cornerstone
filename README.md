@@ -28,7 +28,7 @@ Posts are set to render with a permalink based on their "category" variable in t
 #### Preprocessing and Minification
 ##### LESS files
 - All LESS files are imported into [_style.less](css/_style.less); only [_style.less](css/_style.less) should be complied directly, to /css/style.css
-- [_grid.less](css/_grid.less) is actually my [fluid-to-em grid](https://github.com/gesa/fuild-to-em-grid/ "Fluid-to-em Grid on GitHub"), which I created to try to be friendly to a wide variety of viewport sizes, while still giving a designer a touch more control for readability on wider viewports.
+- [_grid.less](css/_grid.less) is actually my [fluid-to-em grid](https://github.com/gesa/fluid-to-em-grid/ "Fluid-to-em Grid on GitHub"), which I created to try to be friendly to a wide variety of viewport sizes, while still giving a designer a touch more control for readability on wider viewports.
 - [_mixins.less](css/_mixins.less), [_reset.less](css/_reset.less), and [_variables.less](css/_variables.less) are edited versions of their [Twitter Bootstrap](http://twitter.github.com/bootstrap/ "Twitter Bootstrap on GitHub") counterparts. I tend to discourage Twitter Bootstrap for production apps, but I never discount the value of some of the code buried within. I do encourage heavily editing [_mixins.less](css/_mixins.less) (by subtraction) and [_variables.less](css/_variables.less) (by addition) on a per-project basis.
 
 ##### JS files
