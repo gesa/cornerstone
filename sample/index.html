@@ -1,11 +1,6 @@
 ---
-layout: default
-name: scratch
+layout: page
+parent: sample
 ---
-{% for post in site.posts %}
-    {%if post.category == 'sample'%}
-    <article>
-        {{ post.content }}
-    </article>
-    {% endif %}
-{% endfor %}
+
+{% include category-parent-index.html %}
