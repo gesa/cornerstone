@@ -3,14 +3,16 @@
 ## twitter meta (which isn't there yet).
 
 ## technical details
-auto: true          # auto regen
 server: true        # run rack server
-server_port: 3000   # on this port
+server_port: 3001   # on this port
+auto: true          # and auto regen it
 markdown: rdiscount # choose markdown engine
 
 ## additional setup
 exclude: [.gitignore] # '_filename.ext' is also excluded
 permalink: /:categories/:year/:month/:day/:title/
+future: false         # don't publish blog posts for a future date
+lsi: true             # more thorough "related posts" analysis
 
 ## meta info
 title: ''     # this goes after each page name in title tags and such
