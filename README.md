@@ -38,4 +38,3 @@ Posts are set to render with a permalink based on their "category" variable in t
 
 ## Major To-do's
 - [ ] Accessibility review
-- [ ] Automate category indicies
