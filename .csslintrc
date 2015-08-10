@@ -1,0 +1,6 @@
+{
+  "errors": ["important"],
+  "warnings": ["import"],
+  "ids": false,
+  "compatible-vendor-prefixes": false
+}

@@ -1,0 +1,8 @@
+# Pages that go into the robots.txt and don't get included in the sitemap
+blocked:
+  pages:
+    - '/foo.html'
+  directories:
+    - '/404/'
+  categories:
+    - 'private'

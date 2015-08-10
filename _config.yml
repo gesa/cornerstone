@@ -1,0 +1,44 @@
+#######################
+# Config: Development #
+#######################
+# (production settings go in _config.build.yml)
+
+name: Static Site Example.com
+url: 'http://example.com'
+description: I was a developer with Obama for America, building cool things to help get our 44th president re-elected.
+timezone: America/Los_Angeles
+googleanalytics: UA-00000000-1
+author:
+  name: Foo Bar
+  email: foo@example.com
+  github: foobar
+  twitter: foobar
+  twitterid: 99999999  # Twitter account ID
+  googleid: 99999999999999999999 # Publisher ID
+
+exclude: [
+  'img', 'css', 'fonts', '**.haml',
+  '**.png', '**.jpg', '**.jpeg', '**.gif', '**.webp', '**.svg', '**.ico',
+]
+
+###########
+# Content #
+###########
+
+future: true
+show_drafts: true
+permalink: pretty # See Jekyll documentation for permalink styles
+paginate: 10
+paginate_path: 'blog/page-:num'
+
+#############
+# Compiling #
+#############
+
+highlighter: pygments
+markdown: rdiscount
+rdiscount:
+  extensions:
+    - footnotes
+#    - autolink
+#    - smart

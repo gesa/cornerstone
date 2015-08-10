@@ -1,0 +1,16 @@
+---
+layout: none
+---
+User-agent: *
+{% if site.production != true %}
+Disallow: *
+{% else %}
+Allow: *
+{% endif %}
+{% for directory in site.data.sitemap.blocked.directories %}
+Disallow: {{ directory }}{% endfor %}
+{% for category in site.data.sitemap.blocked.categories %}
+Disallow: /{{ category }}/{% endfor %}
+{% for page in site.data.sitemap.blocked.pages %}
+Disallow: {{ page }}{% endfor %}
+Sitemap: {{ site.url }}/sitemap.xml

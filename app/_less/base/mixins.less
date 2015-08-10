@@ -1,0 +1,48 @@
+// ******************** //
+// Extend-only Classes //
+// ****************** //
+
+.inline {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.ir {
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+}
+
+// ******* //
+// Mixins //
+// ***** //
+
+.irGraphic(@url, @retinaUrl, @width, @height) {
+  background-position: center center;
+  background-repeat: no-repeat;
+  .size(@width, @height);
+
+  @media screen and @standard-def {
+    background-image: url(@url);
+  }
+  @media screen and @retina {
+    background-image: url(@retinaUrl);
+  }
+}
+
+.size(@w, @h) {
+  height: @h;
+  width: @w;
+}
+
+.square(@dim) {
+  .size(@dim, @dim);
+}
+
+.selection(@color: @primaryText, @background: inherit) {
+  ::selection, ::-moz-selection, ::-webkit-selection {
+    color: @primaryColor;
+    background: @secondaryColor;
+  }
+}

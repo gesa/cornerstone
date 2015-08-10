@@ -1,0 +1,12 @@
+---
+---
+/* TEAM */
+Author: {{ site.author.name }} <{{ site.author.email }}>
+Site: {{ site.name }} {{ site.url }}
+Twitter: {{ site.author.twitter }}
+
+/* SITE */
+Last update: {{ site.date | %F }}
+Standards: HTML5, CSS3, ES5
+Components: Jekyll
+Software: Jetbrains WebStorm

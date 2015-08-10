@@ -1,0 +1,25 @@
+{% comment %}
+This setup only works if the category is a string, it wont work with integers.
+
+Workarounds:
+If all your posts live in their own category directory, and you don't declare
+a category in yaml front matter, just make sure your index's parent variable
+is encased in quotes.
+
+If your posts all live in /_posts/ and have an explicit category (or array
+of categories) make sure the category name in yaml front matter is encased in
+quotes as well.
+{% endcomment %}
+
+{% assign thisParent = page.parent %}
+
+<ol>
+  {% for post in site.categories[thisParent] %}
+  <li>
+    <a href="{{ post.url }}">
+      {{ post.title }}
+      <time datetime='{{ post.date | date:"%FT%H:%M:$S" }}'>{{ post.date | date:"%B %d, %Y" }}</time>
+    </a>
+  </li>
+  {% endfor %}
+</ol>

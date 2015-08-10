@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  font-size: 62.5%;
+  height: 100%;
+}
+
+body {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  position: relative;
+
+  @media print {
+    font-size: 1.6 * 0.8rem;
+    line-height: 1.5 * 0.8;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+}
+
+b {
+  font-weight: inherit;
+}
+
+figure {
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+i {
+  font-style: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+strong {
+  font-weight: 400;
+}
