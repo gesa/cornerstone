@@ -37,6 +37,9 @@ collections:
   root:
     permalink: /:title
     output: true
+  static:
+    permalink: /:path/
+    output: true
 
 defaults:
   -
