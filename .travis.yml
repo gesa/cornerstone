@@ -1,24 +1,23 @@
 language: node_js
 node_js:
-  - '0.10'
-
+- '4.1'
 sudo: false
-
 cache:
   bundler: true
-  npm: true
   directories:
-  - .vendor
-
+    - node_modules
+    - vendor
 before_install:
-  - gem install bundler
-
+  - rvm install `cat .ruby-version`
 install:
   - npm install
-
-before_script:
-  - npm test
-  - npm run precommit
-
 script:
-  - npm run build
+  - npm run-script build
+env:
+  - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
