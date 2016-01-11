@@ -34,8 +34,8 @@ show_drafts: true
 permalink: pretty
 
 collections:
-  static:
-    permalink: /:path/
+  root:
+    permalink: /:title
     output: true
 
 defaults:

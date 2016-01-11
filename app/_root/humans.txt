@@ -1,4 +1,5 @@
 ---
+layout: none
 ---
 /* TEAM */
 Author: {{ site.author.name }} <{{ site.author.email }}>
