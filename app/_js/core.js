@@ -1,4 +1,4 @@
-(function ($, doc, win) {
+(function (doc, win) {
   "use strict";
 
-})(jQuery, document, window);
+}(document, window));
