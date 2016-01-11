@@ -16,10 +16,8 @@ author:
   twitterid: 99999999  # Twitter account ID
   googleid: 99999999999999999999 # Publisher ID
 
-exclude: [
-  'img', 'css', 'fonts', '**.haml',
-  '**.png', '**.jpg', '**.jpeg', '**.gif', '**.webp', '**.svg', '**.ico',
-]
+exclude: ['img']
+keep_files: ['img', 'js', 'css']
 
 ###########
 # Content #

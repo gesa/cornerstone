@@ -5,41 +5,44 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "gesa/static-site-boilerplate"
   },
-  "dependencies": {
+  "license": "GPL-3.0",
+  "engines": {
+    "node": ">=4",
+    "npm": "~3.5.2"
   },
   "scripts": {
+    "preinstall": "gem install bundler",
     "postinstall": "bundle",
+    "beautify": "grunt beautify",
     "start": "grunt",
-    "verbose": "grunt dev -vvv",
     "test": "grunt test",
-    "precommit": "grunt precommit",
+    "verbose": "grunt dev -vvv",
     "build": "grunt build"
   },
-  "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-autoprefixer": "^2.2.0",
-    "grunt-cli": "^0.1.13",
-    "grunt-concurrent": "^1.0.0",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-concat": "^0.5.1",
-    "grunt-contrib-connect": "^0.9.0",
-    "grunt-contrib-copy": "^0.8.0",
-    "grunt-contrib-csslint": "^0.4.0",
-    "grunt-contrib-cssmin": "^0.12.2",
-    "grunt-contrib-imagemin": "^0.9.4",
-    "grunt-contrib-jshint": "~0.11.1",
-    "grunt-contrib-less": "^1.0.1",
-    "grunt-contrib-uglify": "^0.8.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-csscss": "^0.6.2",
-    "grunt-jekyll": "^0.4.2",
-    "grunt-jsbeautifier": "^0.2.10",
-    "jit-grunt": "^0.9.1",
-    "time-grunt": "^1.1.0"
+  "dependencies": {
+    "imagesloaded": "^4.0.0",
+    "masonry-layout": "^3.3.2"
   },
-  "engines": {
-    "node": ">=0.10.0"
+  "devDependencies": {
+    "autoprefixer": "^6.2.3",
+    "cssnano": "^3.4.0",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-concurrent": "^2.1.0",
+    "grunt-contrib-clean": "^0.7.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-connect": "~0.11.2",
+    "grunt-contrib-copy": "^0.8.2",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-less": "^1.1.0",
+    "grunt-contrib-uglify": "^0.11.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-jekyll": "^0.4.3",
+    "grunt-jsbeautifier": "^0.2.10",
+    "grunt-postcss": "^0.7.1",
+    "jit-grunt": "^0.9.1",
+    "time-grunt": "^1.3.0"
   }
 }

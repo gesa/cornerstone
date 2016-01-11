@@ -9,14 +9,7 @@ module.exports = function (grunt) {
     },
 
     clean: {
-      server: {
-        files: [
-          {
-            dot: true,
-            src: '<%= site.dist %>/*'
-          }
-        ]
-      }
+      init: ['<%= site.dist %>/*']
     },
 
     jekyll: {
@@ -44,7 +37,7 @@ module.exports = function (grunt) {
     },
 
     copy: {
-      server: {
+      images: {
         files: [
           {
             expand: true,
@@ -52,7 +45,6 @@ module.exports = function (grunt) {
             cwd: '<%= site.app %>',
             src: [
               'img/**/*',
-              '!**/_*{,/**}',
               'favicon.ico',
               'touch-icon-*.*'
             ],
@@ -63,33 +55,54 @@ module.exports = function (grunt) {
     },
 
     less: {
-      options: {
-        compress: true,
-        files: {
-          '<%= site.dist %>/css/core.css': '<%= site.app %>/_less/core.less'
-        }
-      },
-      build: {},
-      server: {
+      styles: {
         options: {
           compress: false,
           sourceMap: true
+        },
+        files: {
+          '<%= site.dist %>/css/core.css': '<%= site.app %>/_less/core.less'
         }
       },
       test: {}
     },
 
-    autoprefixer: {
+    concat: {
       options: {
-        browsers: ['last 2 versions'],
-        map: true
+        sourceMap: true,
+        separator: grunt.util.linefeed + ';'
       },
+      scripts: {
+        files: [
+          {
+            dest: '<%= site.dist %>/js/scripts.js',
+            src: [
+              'node_modules/imagesloaded/imagesloaded.pkgd.js',
+              'node_modules/masonry-layout/dist/masonry.pkgd.js',
+              '<%= site.app %>/_js/modules/ravelry-progress.js',
+              '<%= site.app %>/_js/modules/retina-images.js',
+              '<%= site.app %>/_js/pages/fingerprints.js',
+              '<%= site.app %>/_js/core.js'
+            ]
+          }
+        ]
+      }
+    },
+
+    postcss: {
       build: {
+        options: {
+          map: true,
+          processors: [
+            require('autoprefixer')({browsers: 'last 2 versions'}),
+            require('cssnano')()
+          ]
+        },
         files: [
           {
             expand: true,
             cwd: '<%= site.dist %>/css',
-            src: '**/*.css',
+            src: 'core.css',
             dest: '<%= site.dist %>/css'
           }
         ]
@@ -99,7 +112,6 @@ module.exports = function (grunt) {
     connect: {
       options: {
         hostname: '0.0.0.0',
-        livereload: 35728,
         port: 9001,
         middleware: function (connect, options, middlewares) {
           middlewares.unshift(function (request, response, next) {
@@ -111,10 +123,9 @@ module.exports = function (grunt) {
         },
         useAvailablePort: true
       },
-      livereload: {
+      server: {
         options: {
-          base: '<%= site.dist %>',
-          open: true
+          base: '<%= site.dist %>'
         }
       }
     },
@@ -122,48 +133,22 @@ module.exports = function (grunt) {
     watch: {
       images: {
         files: ['<%= site.app %>/img/**/*.*'],
-        tasks: ['copy:server']
+        tasks: ['copy:images']
       },
       less: {
         files: ['<%= site.app %>/_less/**/*.less'],
-        tasks: ['less:server']
+        tasks: ['less:styles']
       },
       javascript: {
         files: ['<%= site.app %>/_js/**/*.js'],
-        tasks: ['concat']
+        tasks: ['concat:scripts']
       },
       jekyll: {
         files: [
           '_*.*',
-          '<%= site.app %>/**/*.{xml,html,yml,md,mkd,markdown,txt}'
+          '<%= site.app %>/**/*.{xml,html,yml,md,txt}'
         ],
-        tasks: ['jekyll:server', 'concurrent']
-      },
-      livereload: {
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        },
-        files: [
-          '<%= site.dist %>/**/*.*'
-        ]
-      }
-    },
-
-    concat: {
-      options: {
-        sourceMap: true,
-        separator: grunt.util.linefeed + ';'
-      },
-      server: {
-        files: [
-          {
-            dest: '<%= site.dist %>/js/scripts.js',
-            src: [
-              'node_modules/jquery/dist/jquery.min.js',
-              '<%= site.app %>/_js/core.js'
-            ]
-          }
-        ]
+        tasks: ['jekyll:server']
       }
     },
 
@@ -180,15 +165,12 @@ module.exports = function (grunt) {
       }
     },
 
-    cssmin: {
-      options: {
-        sourceMap: true
-      },
-      build: {
-        files: {
-          '<%= site.dist %>/css/core.css': '<%= site.dist %>/css/core.css'
-        }
-      }
+    concurrent: {
+      tasks: [
+        'copy:images',
+        'less:styles',
+        'concat:scripts'
+      ]
     },
 
     jshint: {
@@ -199,43 +181,6 @@ module.exports = function (grunt) {
         'Gruntfile.js',
         '<%= site.app %>/_js/**/*.js'
       ]
-    },
-
-    jsbeautifier: {
-      options: {
-        config: '.jsbeautifyrc'
-      },
-      modify: {
-        src: [
-          'Gruntfile.js',
-          '<%= site.app %>/_js/**/*.js'
-        ]
-      },
-      verify: {
-        src: [
-          'Gruntfile.js',
-          '<%= site.app %>/_js/**/*.js'
-        ],
-        options: {
-          mode: 'VERIFY_ONLY'
-        }
-      }
-    },
-
-    csscss: {
-      options: {
-        bundleExec: true,
-        ignoreSassMixins: true,
-        //ignoreProperties:'',
-        //ignoreSelectors: '',
-        minMatch: 4,
-        verbose: true
-      },
-      check: {
-        src: [
-          '<%= site.app %>/_less/core.less'
-        ]
-      }
     },
 
     csslint: {
@@ -249,45 +194,52 @@ module.exports = function (grunt) {
       }
     },
 
-    concurrent: {
-      server: [
-        'copy:server',
-        'less:server',
-        'concat'
-      ]
+    jsbeautifier: {
+      options: {
+        config: '.jsbeautifyrc'
+      },
+      verify: {
+        src: [
+          'Gruntfile.js',
+          '<%= site.app %>/_js/**/*.js'
+        ],
+        options: {
+          mode: 'VERIFY_ONLY'
+        }
+      },
+      modify: {
+        src: [
+          'Gruntfile.js',
+          '<%= site.app %>/_js/**/*.js'
+        ]
+      }
     }
   });
 
   grunt.registerTask('dev', [
-    'clean:server',
+    'clean:init',
     'jekyll:server',
-    'concurrent:server',
-    'connect:livereload',
+    'concurrent:tasks',
+    'connect:server',
     'watch'
   ]);
 
   grunt.registerTask('build', [
-    'clean:server',
+    'clean:init',
     'jekyll:build',
-    'concurrent:server',
-    'autoprefixer:build',
-    'uglify:build',
-    'cssmin:build'
+    'concurrent:tasks',
+    'postcss:build',
+    'uglify:build'
   ]);
 
   grunt.registerTask('test', [
-    'jekyll:check',
     'jshint:all',
-    'jsbeautifier:verify',
-    'csscss:check' //,
-    //'less:server',
-    //'csslint:check'
+    'csslint:check',
+    'jsbeautifier:verify'
   ]);
 
-  grunt.registerTask('precommit', [
-    'jekyll:check',
-    'jsbeautifier:modify',
-    'jshint:all'
+  grunt.registerTask('beautify', [
+    'jsbeautifier:modify'
   ]);
 
   grunt.registerTask('default', [
