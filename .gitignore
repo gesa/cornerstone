@@ -15,9 +15,6 @@ Thumbs.db
 *.swp
 ._*
 *~
-.sass-cache
-.jekyll/
-.tmp-jekyll/
 
 # Ignore packages #
 *.7z
@@ -29,10 +26,5 @@ Thumbs.db
 *.tar
 *.zip
 
-# Ignore vendor files #
 node_modules/
-.vendor/
-.tmp/
-.build-tmp/
-
 dist/
