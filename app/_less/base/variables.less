@@ -1,8 +1,29 @@
-
-// Responsive trickery!
+// Colors
 // -------------------------
-@standard-def : '(-webkit-max-device-pixel-ratio: 1.49), (max-resolution: 143.9dpi), (max-resolution: 1.5dppx)';
-@retina : '(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.49dppx)';
+@white : aliceblue;
+@black: #333;
+
+@primaryColor: @black;
+@secondaryColor: @white;
+
+// Links
+// -------------------------
+@linkColor : @primaryColor;
+@linkColorHover : lighten(@linkColor, 5%);
+
+// Typography
+// -------------------------
+@sansFontFamily : 'Fira Sans', 'Futura Light', Verdana, 'Trebuchet MS', Helvetica, Arial, sans-serif;
+@serifFontFamily : Georgia, 'Times New Roman', Times, serif;
+@monoFontFamily : 'Fira Mono', Monaco, Menlo, Consolas, 'Courier New', monospace;
+
+@remBase: 62.5%;
+@primaryText: @primaryColor;
+
+// Viewport manipulation
+// -------------------------
+@standard-def : ~'(-webkit-max-device-pixel-ratio: 1.49), (max-resolution: 143.9dpi), (max-resolution: 1.5dppx)';
+@retina : ~'(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.49dppx)';
 
 @small-phone: 480px;
 @large-phone: 640px;
@@ -11,7 +32,6 @@
 @small-laptop: 1120px;
 @medium-laptop: 1280px;
 @large-laptop: 1440px;
-@small-desktop: 1600px;
+@small-desktop: 1000px;
 @medium-desktop: 1760px;
 @large-desktop: 1920px;
-

@@ -40,9 +40,9 @@
   .size(@dim, @dim);
 }
 
-.selection(@color: @primaryText, @background: inherit) {
+.selection(@color, @background) {
   ::selection, ::-moz-selection, ::-webkit-selection {
-    color: @primaryColor;
-    background: @secondaryColor;
+    color: @color;
+    background: @background;
   }
 }
