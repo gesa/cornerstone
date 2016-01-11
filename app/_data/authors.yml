@@ -1,0 +1,14 @@
+foo:
+  name: Foo Bar
+  email: foo@example.com
+  github: foobar
+  twitter: foobar
+  twitterid: 99999999  # Twitter account ID
+  googleid: 99999999999999999999 # Publisher ID
+joan:
+  name: Joan Q Public
+  email: joan@example.com
+  github: joanq
+  twitter: joanq
+  twitterid: 99999999
+  googleid: 99999999999999999999

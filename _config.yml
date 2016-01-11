@@ -9,16 +9,21 @@
 
 name: Static Site Example.com
 url: 'http://example.com'
-description: I was a developer with Obama for America, building cool things to help get our 44th president re-elected.
+description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 timezone: America/Los_Angeles
+favicon: /favicon.ico # <-- feel free to change but it should be something
 googleanalytics: UA-00000000-1
-author:
-  name: Foo Bar
-  email: foo@example.com
-  github: foobar
-  twitter: foobar
-  twitterid: 99999999  # Twitter account ID
-  googleid: 99999999999999999999 # Publisher ID
+
+twitter: foobar
+twitterid: 99999999  # Twitter account ID
+googleid: 99999999999999999999 # Publisher ID
+
+share:
+  image: /path/to/image.jpg
+  width: 1200 # Facebook recommends minimum of 1200 x 630
+  height: 630
+  description: Facebook can get different text from search engines
+  title: also share title can be different from search engine/browser title
 
 #############
 # Authoring #
@@ -39,23 +44,6 @@ defaults:
       path: ''
     values:
       layout: 'default'
-  -
-    scope:
-      path: 'fingerprints'
-    values:
-      layout: 'screenshot-post'
-      permalink: /:categories/:title/
-  -
-    scope:
-      path: 'words'
-    values:
-      layout: 'written-post'
-      permalink: /words/:year/:month/:title/
-  -
-    scope:
-      path: 'knitting'
-    values:
-      layout: 'written-post'
 
 #############
 # Compiling #

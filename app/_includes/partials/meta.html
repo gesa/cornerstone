@@ -1,45 +1,51 @@
+{% capture title %}{{ page.title }} | {{ site.name }}{% endcapture %}
+{% capture description %}{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}{% endcapture %}
+
+{% capture fbtitle %}{% if page.share.title %}{{ page.share.title }}{% elsif site.share.title %}{{ site.share.title }}{% else %}{{ title }}{% endif %}{% endcapture %}
+{% capture fbdescription %}{% if page.share.description %}{{ page.share.description }}{% elsif site.share.description %}{{ site.share.description }}{% else %}{{ description }}{% endif %}{% endcapture %}
+{% capture image %}{{ site.url }}{% if page.share.image %}{{ page.share.image }}{% else %}fftf-share.jpg{% endif %}{% endcapture %}
+
+{% if page.author %}
+{% assign author = site.data.[page.author] %}
+{% else %}
+{% assign author = site.author %}
+{% endif %}
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.name }}</title>
-<meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
 
 <!-- *** social meta *** -->
   <!-- facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="{{ site.url }}/image.png" />
-  <meta property="og:image:width" content="500" />
-  <meta property="og:image:height" content="500" />
-  <meta property="og:site_name" content="{{ site.name }}" />
-  <meta property="og:determiner" content="" />
+  <meta property="og:site_name" content="{{ site.name }}"/>
+  <meta property="og:title" content="{{ fbtitle }}" />
+  <meta property="og:description" content="{{ description }}" />
+  <meta property="og:image" content="{{ image }}" />
+  <meta property="og:image:width" content="{% if page.share.width %}{{ page.share.width }}{% else %}{{ site.share.width }}{% endif %}"/>
+  <meta property="og:image:height" content="{% if page.share.height %}{{ page.share.height }}{% else %}{{ site.share.height}}{% endif %}"/>
   <meta property="og:locale" content="en_US" />
   <meta property="og:locale:alternate" content="en_GB" />
-  <meta property="og:title" content="{% if page.title %}{{ page.title }} | {% endif %}{{ site.name }}" />
-  <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}" />
 
   <!-- twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="{{ site.author.twitter }}">
-  <meta name="twitter:title" content="{% if page.title %}{{ page.title }} | {% endif %}{{ site.name }}">
-  <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}"/>
-  <meta name="twitter:image:src" content="{{ site.url }}/image.png">
+  <meta name="twitter:site" content="{{ author.twitter }}">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ description }}"/>
+  <meta name="twitter:image:src" content="{{ image }}">
   <meta name="twitter:domain" content="{{ site.url | remove:'http://' | remove:'https://' }}">
-  <meta name="twitter:account_id" content="{{ site.author.twitterid }}" />
+  <meta name="twitter:account_id" content="{{ author.twitterid }}"/>
 
   <!-- google+ -->
-  <meta itemprop="name" content="{% if page.title %}{{ page.title }} | {% endif %}{{ site.name }}">
-  <meta itemprop="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-  <meta itemprop="image" content="{{ site.url }}/image.png">
+  <meta itemprop="name" content="{{ title }}">
+  <meta itemprop="description" content="{{ description }}">
+  <meta itemprop="image" content="{{ image }}">
 <!-- /*** social meta *** -->
 
-<link rel="publisher" href="https://plus.google.com/{{ site.author.googleid }}">
+<link rel="publisher" href="https://plus.google.com/{{ author.googleid }}">
 
-<link rel="apple-/touch-icon-precomposed" href="/touch-icon-iphone.png"/>
-<link rel="apple-/touch-icon-precomposed" sizes="76x76" href="/touch-icon-ipad.png"/>
-<link rel="apple-/touch-icon-precomposed" sizes="120x120" href="/touch-icon-iphone-retina.png"/>
-<link rel="apple-/touch-icon-precomposed" sizes="152x152" href="/touch-icon-ipad-retina.png"/>
-<link rel="shortcut icon" href="/favicon.ico">
-
-<link rel="author" content="humans.txt" />
-<link rel="stylesheet" href="/css/core.css">
+<link rel="icon" type="image/png" href="{{ site.url }}{{ site.favicon }}"/>
+<link rel="stylesheet" type="text/css" href="/css/core.css">
