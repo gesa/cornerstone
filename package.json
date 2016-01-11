@@ -21,10 +21,6 @@
     "verbose": "grunt dev -vvv",
     "build": "grunt build"
   },
-  "dependencies": {
-    "imagesloaded": "^4.0.0",
-    "masonry-layout": "^3.3.2"
-  },
   "devDependencies": {
     "autoprefixer": "^6.2.3",
     "cssnano": "^3.4.0",
