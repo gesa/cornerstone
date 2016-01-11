@@ -1,0 +1,18 @@
+---
+layout: none
+permalink: robots.txt
+---
+User-agent: *
+{% if site.production != true %}
+Disallow: *
+{% else %}
+Allow: *
+{% endif %}
+{% for line in site.data.disallow %}Disallow: {{ line }}{% endfor %}
+{% for page in site.static %}{% if page.published == false %}
+Disallow: {{ page.url | remove:'index.html' }}{% endif %}{% endfor %}
+{% for page in site.pages %}{% if page.published == false %}
+Disallow: {{ page.url | remove:'index.html' }}{% endif %}{% endfor %}
+{% for post in site.posts %}{% if post.published == false %}
+Disallow: {{ post.url | remove:'index.html' }}{% endif %}{% endfor %}
+Sitemap: {{ site.url }}/sitemap.xml

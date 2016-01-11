@@ -1,7 +1,11 @@
-#######################
-# Config: Development #
-#######################
-# (production settings go in _config.build.yml)
+#################################################
+# Config: Development                           #
+#################################################
+# (production settings go in _config.build.yml) #
+
+#############
+# Meta info #
+#############
 
 name: Static Site Example.com
 url: 'http://example.com'
@@ -16,27 +20,53 @@ author:
   twitterid: 99999999  # Twitter account ID
   googleid: 99999999999999999999 # Publisher ID
 
-exclude: ['img']
-keep_files: ['img', 'js', 'css']
-
-###########
-# Content #
-###########
+#############
+# Authoring #
+#############
 
 future: true
 show_drafts: true
-permalink: pretty # See Jekyll documentation for permalink styles
-paginate: 10
-paginate_path: 'blog/page-:num'
+permalink: pretty
+
+collections:
+  static:
+    permalink: /:path/
+    output: true
+
+defaults:
+  -
+    scope:
+      path: ''
+    values:
+      layout: 'default'
+  -
+    scope:
+      path: 'fingerprints'
+    values:
+      layout: 'screenshot-post'
+      permalink: /:categories/:title/
+  -
+    scope:
+      path: 'words'
+    values:
+      layout: 'written-post'
+      permalink: /words/:year/:month/:title/
+  -
+    scope:
+      path: 'knitting'
+    values:
+      layout: 'written-post'
 
 #############
 # Compiling #
 #############
 
-highlighter: pygments
-markdown: rdiscount
-rdiscount:
-  extensions:
-    - footnotes
-#    - autolink
-#    - smart
+exclude: ['img']
+keep_files: ['img', 'js', 'css']
+
+highlighter: rouge
+
+markdown: kramdown
+kramdown:
+#  input: GFM
+  smart_quotes: ["apos", "apos", "quot", "quot"]
