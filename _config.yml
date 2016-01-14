@@ -14,7 +14,7 @@ timezone: America/Los_Angeles
 favicon: /favicon.ico # <-- feel free to change but it should be something
 googleanalytics: UA-00000000-1
 
-twitter: @foobar
+twitter: '@foobar'
 twitterid: 99999999  # Twitter account ID
 googleid: 99999999999999999999 # Publisher ID
 
