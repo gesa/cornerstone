@@ -22,8 +22,8 @@ share:
   image: /path/to/image.jpg
   width: 1200 # Facebook recommends minimum of 1200 x 630
   height: 630
-  description: Facebook can get different text from search engines
   title: also share title can be different from search engine/browser title
+  description: Facebook share text can be different from search engine text
 
 #############
 # Authoring #
