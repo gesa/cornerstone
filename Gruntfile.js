@@ -136,22 +136,17 @@ module.exports = function (grunt) {
     },
 
     postcss: {
-      build: {
-        options: {
-          map: true,
-          processors: [
-            require('autoprefixer')({
-              browsers: 'last 2 versions'
-            }),
-            require('cssnano')()
-          ]
-        },
-        files: [
-          {
-            src: '<%= site.dist %>/css/core.css',
-            dest: '<%= site.dist %>/css'
-          }
+      options: {
+        map: {inline: false},
+        processors: [
+          require('autoprefixer')({
+            browsers: 'last 2 versions'
+          }),
+          require('cssnano')()
         ]
+      },
+      build: {
+        src: '<%= site.dist %>/css/core.css'
       }
     },
 
