@@ -1,11 +1,11 @@
 {
-  "name": "static-site-boilerplate",
+  "name": "cornerstone",
   "version": "0.0.1",
   "description": "Boilerplate for static sites",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "gesa/static-site-boilerplate"
+    "url": "gesa/cornerstone"
   },
   "license": "GPL-3.0",
   "engines": {
@@ -15,11 +15,11 @@
   "scripts": {
     "preinstall": "gem install bundler",
     "postinstall": "bundle",
-    "beautify": "grunt beautify",
     "start": "grunt",
+    "build": "grunt build",
     "test": "grunt test",
-    "verbose": "grunt dev -vvv",
-    "build": "grunt build"
+    "beautify": "grunt beautify",
+    "verbose": "grunt build -vvv"
   },
   "devDependencies": {
     "autoprefixer": "^6.2.3",

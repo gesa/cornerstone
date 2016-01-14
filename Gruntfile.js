@@ -9,7 +9,7 @@ module.exports = function (grunt) {
     },
 
     clean: {
-      init: ['<%= site.dist %>/*']
+      init: '<%= site.dist %>'
     },
 
     jekyll: {
@@ -26,7 +26,7 @@ module.exports = function (grunt) {
       },
       server: {
         options: {
-          src: '<%= site.app %>'
+          config: '_config.yml'
         }
       },
       check: {
@@ -63,8 +63,7 @@ module.exports = function (grunt) {
         files: {
           '<%= site.dist %>/css/core.css': '<%= site.app %>/_less/core.less'
         }
-      },
-      test: {}
+      }
     },
 
     concat: {
@@ -77,11 +76,7 @@ module.exports = function (grunt) {
           {
             dest: '<%= site.dist %>/js/scripts.js',
             src: [
-              'node_modules/imagesloaded/imagesloaded.pkgd.js',
-              'node_modules/masonry-layout/dist/masonry.pkgd.js',
-              '<%= site.app %>/_js/modules/ravelry-progress.js',
               '<%= site.app %>/_js/modules/retina-images.js',
-              '<%= site.app %>/_js/pages/fingerprints.js',
               '<%= site.app %>/_js/core.js'
             ]
           }
@@ -89,26 +84,12 @@ module.exports = function (grunt) {
       }
     },
 
-    postcss: {
-      build: {
-        options: {
-          map: true,
-          processors: [
-            require('autoprefixer')({
-              browsers: 'last 2 versions'
-            }),
-            require('cssnano')()
-          ]
-        },
-        files: [
-          {
-            expand: true,
-            cwd: '<%= site.dist %>/css',
-            src: 'core.css',
-            dest: '<%= site.dist %>/css'
-          }
-        ]
-      }
+    concurrent: {
+      tasks: [
+        'copy:images',
+        'less:styles',
+        'concat:scripts'
+      ]
     },
 
     connect: {
@@ -154,6 +135,26 @@ module.exports = function (grunt) {
       }
     },
 
+    postcss: {
+      build: {
+        options: {
+          map: true,
+          processors: [
+            require('autoprefixer')({
+              browsers: 'last 2 versions'
+            }),
+            require('cssnano')()
+          ]
+        },
+        files: [
+          {
+            src: '<%= site.dist %>/css/core.css',
+            dest: '<%= site.dist %>/css'
+          }
+        ]
+      }
+    },
+
     uglify: {
       options: {
         sourceMap: true,
@@ -167,19 +168,11 @@ module.exports = function (grunt) {
       }
     },
 
-    concurrent: {
-      tasks: [
-        'copy:images',
-        'less:styles',
-        'concat:scripts'
-      ]
-    },
-
     jshint: {
       options: {
         jshintrc: '.jshintrc'
       },
-      all: [
+      scripts: [
         'Gruntfile.js',
         '<%= site.app %>/_js/**/*.js'
       ]
@@ -189,7 +182,7 @@ module.exports = function (grunt) {
       options: {
         csslintrc: '.csslintrc'
       },
-      check: {
+      styles: {
         src: [
           '<%= site.dist %>/css/core.css'
         ]
@@ -235,8 +228,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test', [
-    'jshint:all',
-    'csslint:check',
+    'jshint:scripts',
+    'csslint:styles',
     'jsbeautifier:verify'
   ]);
 
