@@ -1,11 +1,12 @@
-/* *
-<noscript>
-  <img src="@1x-image" alt="Foo bar baz" width="100" height="100" />
-</noscript>
-<img src="#" data-src1x="@1x-image" data-src2x="@2x-image"
-  alt="Foo bar baz" width="100" height="100" />
-* */
-
+/**
+ * Self-invoking function that loops through all the images on the page
+ * containing a 2x image and updates their sources with the appropriate path
+ * <noscript>
+ *   <img src="@1x-image" alt="Foo bar baz" width="100" height="100" />
+ * </noscript>
+ * <img src="#" data-src1x="@1x-image" data-src2x="@2x-image"
+ * alt="Foo bar baz" width="100" height="100" />
+ * */
 (function (doc, win) {
   "use strict";
 
