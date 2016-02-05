@@ -1,63 +1,26 @@
 ---
-layout: none
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {% for page in site.pages %}
-    {% if site.data.disallow contains page.url or page.published == false %}
-    {% else %}
-    <url>
-      <loc>{{ site.url }}{{ page.url | remove:'index.html' }}</loc>
-      {% if page.sitemod.lastmod == null %}<lastmod>
-        {{ site.time | date_to_xmlschema }}</lastmod>
-      {% else %}
-        <lastmod>{{ page.sitemap.lastmod | date_to_xmlschema }}</lastmod>
-      {% endif %}
-      {% if page.sitemap.changefreq == null %}
-        <changefreq>monthly</changefreq>
-      {% else %}
-        <changefreq>{{ page.sitemap.changefreq }}</changefreq>
-      {% endif %}
-      <priority>1</priority>
-    </url>
-    {% endif %}
-  {% endfor %}
-  {% for post in site.posts %}
-    {% if site.data.disallow contains post.url or post.published == false %}
-    {% else %}
-    <url>
-      <loc>{{ site.url }}{{ post.url | remove:'index.html' }}</loc>
-      {% if post.sitemod.lastmod == null %}<lastmod>
-        {{ site.time | date_to_xmlschema }}</lastmod>
-      {% else %}
-        <lastmod>{{ post.sitemap.lastmod | date_to_xmlschema }}</lastmod>
-      {% endif %}
-      {% if post.sitemap.changefreq == null %}
-        <changefreq>monthly</changefreq>
-      {% else %}
-        <changefreq>{{ post.sitemap.changefreq }}</changefreq>
-      {% endif %}
-      <priority>1</priority>
-    </url>
-    {% endif %}
-  {% endfor %}
-  {% for page in site.static %}
-    {% if site.data.disallow contains page.url or page.published == false %}
-    {% else %}
-    <url>
-      <loc>{{ site.url }}{{ page.url | remove:'index.html' }}</loc>
-      {% if page.sitemod.lastmod == null %}<lastmod>
-        {{ site.time | date_to_xmlschema }}</lastmod>
-      {% else %}
-        <lastmod>{{ page.sitemap.lastmod | date_to_xmlschema }}</lastmod>
-      {% endif %}
-      {% if page.sitemap.changefreq == null %}
-        <changefreq>monthly</changefreq>
-      {% else %}
-        <changefreq>{{ page.sitemap.changefreq }}</changefreq>
-      {% endif %}
-      <priority>1</priority>
-    </url>
-    {% endif %}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{{ site.url }}</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  {% for page in site.documents %}
+  {% if site.data.disallow contains page.url or page.published == false %}
+  {% else %}
+  <url>
+    <loc>{{ site.url }}{{ page.url | remove:'index.html' }}</loc>
+    {% if page.sitemod.lastmod == null %}
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>{% else %}
+    <lastmod>{{ page.sitemap.lastmod | date_to_xmlschema }}</lastmod>{% endif %}
+    {% if page.sitemap.changefreq == null %}
+    <changefreq>monthly</changefreq>{% else %}
+    <changefreq>{{ page.sitemap.changefreq }}</changefreq>{% endif %}
+    <priority>1</priority>
+  </url>
+  {% endif %}
   {% endfor %}
 </urlset>

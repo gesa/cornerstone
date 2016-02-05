@@ -1,10 +1,10 @@
 ---
-layout: none
 ---
 /* TEAM */
-Author: {{ site.author.name }} <{{ site.author.email }}>
+{% for author in site.data.authors %}
+author[1]: {{ author[1].name }} <{{ author[1].email }}>
 Site: {{ site.name }} {{ site.url }}
-Twitter: {{ site.author.twitter }}
+Twitter: {{ author[1].twitter }}{% endfor %}
 
 /* SITE */
 Last update: {{ site.date | %F }}
