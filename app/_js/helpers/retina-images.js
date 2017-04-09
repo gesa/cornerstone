@@ -20,4 +20,4 @@ export default function retinaImages() {
       current.setAttribute('src', current.dataset[pixelRatio]);
     }
   });
-};
+}

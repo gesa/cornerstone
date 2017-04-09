@@ -155,10 +155,13 @@ module.exports = function (grunt) {
         tasks: ['less:css']
       },
       javascript: {
-        files: [
-          '<%= site.app %>/_js/**/*.js'
-        ],
+        files: ['<%= site.app %>/_js/**/*.js'],
+        options: {
+          interrupt: true,
+          spawn: false
+        },
         tasks: [
+          'eslint:lint',
           'browserify:compile',
           'exorcise'
         ]
@@ -207,34 +210,10 @@ module.exports = function (grunt) {
       ]
     },
 
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc'
-      },
-      all: [
-        'Gruntfile.js',
-        '<%= site.app %>/_js/**/*.js'
-      ]
-    },
-
-    jsbeautifier: {
-      options: {
-        config: '.jsbeautifyrc'
-      },
-      modify: {
-        src: [
-          'Gruntfile.js',
-          '<%= site.app %>/_js/**/*.js'
-        ]
-      },
-      verify: {
-        src: [
-          'Gruntfile.js',
-          '<%= site.app %>/_js/**/*.js'
-        ],
-        options: {
-          mode: 'VERIFY_ONLY'
-        }
+    eslint: {
+      options: {},
+      lint: {
+        src: '<%= site.app %>/_js/**/*.js'
       }
     },
 
@@ -269,10 +248,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'jekyll:check',
-    'jshint:all',
-    'jsbeautifier:verify',
     'csscss:check',
     'csslint:check'
+    'eslint:lint'
   ]);
 
   grunt.registerTask('precommit', [
@@ -284,4 +262,8 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'dev'
   ]);
+
+  grunt.event.on('watch', function (action, filePath) {
+    grunt.config('eslint.lint.src', filePath);
+  });
 };
