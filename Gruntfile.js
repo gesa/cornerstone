@@ -13,18 +13,11 @@ module.exports = function (grunt) {
     },
 
     clean: {
-      init: {
-        files: [
-          {
-            dot: true,
-            src: '<%= site.dist %>/*'
-          }
-        ]
-      }
+      init:  '<%= site.dist %>/*'
     },
 
     copy: {
-      assets: {
+      images: {
         files: [
           {
             expand: true,
@@ -46,6 +39,28 @@ module.exports = function (grunt) {
         files: {
           '<%= site.dist %>/css/core.css': '<%= site.app %>/_less/core.less'
         }
+      }
+    },
+
+    browserify: {
+      options: {
+        browserifyOptions: {
+          debug: true
+        },
+        debug: true,
+        transform: [
+          ['babelify', {"presets": [["es2015"]]}]
+        ]
+      },
+      compile: {
+        files: {'<%= site.dist %>/js/scripts.js': '<%= site.app %>/_js/core.js'}
+      }
+    },
+
+    exorcise: {
+      dev: {
+        options: {},
+        files: {'<%= site.dist %>/js/scripts.js.map': '<%= site.dist %>/js/scripts.js'}
       }
     },
 
@@ -114,25 +129,6 @@ module.exports = function (grunt) {
       }
     },
 
-    concat: {
-      options: {
-        sourceMap: true,
-        separator: grunt.util.linefeed + ';'
-      },
-      scripts: {
-        files: [
-          {
-            src: [
-              '<%= site.app %>/_js/modules/**/*.js',
-              '<%= site.app %>/_js/pages/**/*.js',
-              '<%= site.app %>/_js/core.js'
-            ],
-            dest: '<%= site.dist %>/js/core.js'
-          }
-        ]
-      }
-    },
-
     uglify: {
       options: {
         sourceMap: true,
@@ -141,7 +137,7 @@ module.exports = function (grunt) {
       },
       build: {
         files: {
-          '<%= site.dist %>/js/core.js': '<%= site.dist %>/js/core.js'
+          '<%= site.dist %>/js/scripts.js': '<%= site.dist %>/js/scripts.js'
         }
       }
     },
@@ -162,9 +158,12 @@ module.exports = function (grunt) {
         files: [
           '<%= site.app %>/_js/**/*.js'
         ],
-        tasks: ['concat:scripts']
+        tasks: [
+          'browserify:compile',
+          'exorcise'
+        ]
       },
-      assets: {
+      images: {
         files: ['<%= site.app %>/img/**/*'],
         tasks: ['copy']
       },
@@ -197,9 +196,9 @@ module.exports = function (grunt) {
 
     concurrent: {
       compile: [
-        'copy:assets',
+        'copy:images',
         'less:css',
-        'concat:scripts'
+        'browserify:compile'
       ],
       build: [
         'postcss:build',
@@ -264,6 +263,7 @@ module.exports = function (grunt) {
     'clean:init',
     'jekyll:build',
     'concurrent:compile',
+    'exorcise',
     'concurrent:build'
   ]);
 
