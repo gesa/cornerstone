@@ -1,15 +1,24 @@
-{% assign counter = 0 %}
+{% comment %}
+A function to automatically list posts in a given category. It is _not_ a
+paginator. This is an important distinction, because the Jekyll Paginator
+can only run in one place on the site. (in this boilerplate, it runs at
+app/blog-posts) That means it's not straightforward to have multiple categories
+that are paginated. This include will work on any page, but isn't nearly as
+smart as a paginator.
+@param {string} [category] - the name of the category you wish to display recent posts from. Defaults to current category.
+@param {number} [limit=20] - maximum number of posts to render. Defaults to 20.
+@returns an ordered list
+{% endcomment %}
+
+{% assign category = include.category | default: page.dir | remove: "/" %}
+{% assign limit = include.limit | default: 20 %}
 <ol>
-  {% for post in site.categories[include.category] %}
+  {% for post in site.categories[category] limit:limit  %}
   <li>
     <a href="{{ post.url }}">
       {{ post.title }}
       <time datetime='{{ post.date | date:"%FT%H:%M:$S" }}'>{{ post.date | date:"%B %d, %Y" }}</time>
     </a>
   </li>
-  {% assign counter = counter | plus:'1' %}
-  {% if counter > include.limit %}
-  {% break %}
-  {% endif %}
   {% endfor %}
 </ol>
