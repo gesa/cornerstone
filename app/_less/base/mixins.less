@@ -1,48 +1,31 @@
-// ******************** //
-// Extend-only Classes //
-// ****************** //
-
-.inline {
+.inline() {
   display: inline;
   margin: 0;
   padding: 0;
 }
 
-.ir {
+.imageReplacement(@imageUrl, @retinaImageUrl, @width, @height) {
+  background-position: center center;
+  background-repeat: no-repeat;
   overflow: hidden;
   text-indent: 100%;
   white-space: nowrap;
-}
-
-// ******* //
-// Mixins //
-// ***** //
-
-.irGraphic(@url, @retinaUrl, @width, @height) {
-  background-position: center center;
-  background-repeat: no-repeat;
   .size(@width, @height);
 
-  @media screen and @standard-def {
-    background-image: url(@url);
+  @media @standard-def {
+    background-image: url(@imageUrl);
   }
-  @media screen and @retina {
-    background-image: url(@retinaUrl);
+
+  @media @retina {
+    background-image: url(@retinaImageUrl);
   }
 }
 
-.size(@w, @h) {
-  height: @h;
-  width: @w;
+.size(@width, @height) {
+  height: @height;
+  width: @width;
 }
 
-.square(@dim) {
-  .size(@dim, @dim);
-}
-
-.selection(@color, @background) {
-  ::selection, ::-moz-selection, ::-webkit-selection {
-    color: @color;
-    background: @background;
-  }
+.square(@dimension) {
+  .size(@dimension, @dimension);
 }

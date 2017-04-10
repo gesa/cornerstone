@@ -152,7 +152,14 @@ module.exports = function (grunt) {
       },
       less: {
         files: ['<%= site.app %>/_less/**/*.less'],
-        tasks: ['less:css']
+        tasks: [
+          'stylelint:lint',
+          'less:css'
+        ],
+        options: {
+          interrupt: true,
+          spawn: false
+        }
       },
       javascript: {
         files: ['<%= site.app %>/_js/**/*.js'],
@@ -217,17 +224,18 @@ module.exports = function (grunt) {
       }
     },
 
-    csslint: {
+    stylelint: {
       options: {
-        csslintrc: '.csslintrc'
+        configFile: '.stylelintrc',
+        syntax: 'less'
       },
-      check: {
+      lint: {
         src: [
-          '<%= site.dist %>/css/core.css'
+          '<%= site.app %>/_less/**/*.{css,less}',
+          '!<%= site.app %>/_less/lib/*.*'
         ]
       }
     }
-
   });
 
   grunt.registerTask('dev', [
@@ -248,8 +256,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'jekyll:check',
-    'csscss:check',
-    'csslint:check'
+    'stylelint:lint',
     'eslint:lint'
   ]);
 
@@ -265,5 +272,6 @@ module.exports = function (grunt) {
 
   grunt.event.on('watch', function (action, filePath) {
     grunt.config('eslint.lint.src', filePath);
+    grunt.config('stylelint.lint.src', filePath);
   });
 };

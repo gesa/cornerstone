@@ -13,17 +13,17 @@
 
 // Typography
 // -------------------------
-@sansFontFamily : 'Fira Sans', 'Futura Light', Verdana, 'Trebuchet MS', Helvetica, Arial, sans-serif;
+@sansFontFamily : 'Futura Light', Verdana, 'Trebuchet MS', Helvetica, Arial, sans-serif;
 @serifFontFamily : Georgia, 'Times New Roman', Times, serif;
-@monoFontFamily : 'Fira Mono', Monaco, Menlo, Consolas, 'Courier New', monospace;
+@monoFontFamily : Monaco, Menlo, Consolas, 'Courier New', monospace;
 
-@remBase: 62.5%;
+@remBase: 62.5%; // Sets rems at equivalent to 10px
 @primaryText: @primaryColor;
 
 // Viewport manipulation
 // -------------------------
-@standard-def : ~'(-webkit-max-device-pixel-ratio: 1.49), (max-resolution: 143.9dpi), (max-resolution: 1.5dppx)';
-@retina : ~'(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.49dppx)';
+@standard-def : ~'screen and (max-resolution: 143.04dpi)';
+@retina : ~'screen and (min-resolution: 143.05dpi)';
 
 @small-phone: 480px;
 @large-phone: 640px;
