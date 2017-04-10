@@ -7,7 +7,7 @@ Site: {{ site.name }} {{ site.url }}
 Twitter: {{ author[1].twitter }}{% endfor %}
 
 /* SITE */
-Last update: {{ site.date | %F }}
+Last update: {{ site.time | date: "%F" }}
 Standards: HTML5, CSS3, ES5
 Components: Jekyll
 Software: Jetbrains WebStorm
