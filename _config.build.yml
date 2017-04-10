@@ -5,3 +5,4 @@
 future: false
 show_drafts: false
 production: true
+url: http://example.com

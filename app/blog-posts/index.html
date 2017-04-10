@@ -1,0 +1,40 @@
+---
+# Paginator doesn't generate a page 1, but does number subsequent pages. This
+# protects against that getting you in trouble down the road.
+redirect_from: /blog-posts/page-1/
+---
+
+<p>
+  This is a sample of what a proper paginator does. It can only be used in one
+  directory on the site, but is able to access all posts from all categories.
+</p>
+
+{% for post in paginator.posts %}
+<article>
+  <h1>
+    <a href="{{ post.url }}">{{ post.title }}</a>
+  </h1>
+  <p class="meta">
+    Published on
+    <time datetime='{{ post.date | date: "%FT%H:%M:$S" }}'>{{ post.date | date:"%B %d, %Y" }}</time>
+    {% if post.author %} by {{ post.author }}{% endif %}
+  </p>
+  <div class="content">
+    {{ post.excerpt }}
+  </div>
+</article>
+{% endfor %}
+
+<nav class="paginator">
+  {% if paginator.previous_page %}
+  <a href="{{ paginator.previous_page_path }}" class="previous">Previous page</a>
+  {% else %}
+  <span class="previous">Previous page</span>
+  {% endif %}
+  <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }} pages</span>
+  {% if paginator.next_page %}
+  <a href="{{ paginator.next_page_path }}" class="next">Next page</a>
+  {% else %}
+  <span class="next">Next page</span>
+  {% endif %}
+</nav>

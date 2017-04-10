@@ -8,7 +8,7 @@
 #############
 
 name: Static Site Example.com
-url: 'http://example.com'
+url: http://localhost:9084
 description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 timezone: America/Los_Angeles
 favicon: /favicon.ico # <-- feel free to change but it should be something
@@ -37,7 +37,6 @@ collections:
   root:
     permalink: /:title
     output: true
-    layout: none
   static:
     permalink: /:path/
     output: true
@@ -71,3 +70,14 @@ markdown: kramdown
 kramdown:
   input: GFM
   smart_quotes: ['apos', 'apos', 'quot', 'quot']
+
+paginate: 2
+paginate_path: '/blog-posts/page-:num/'
+
+##########
+# System #
+##########
+gems:
+  - jekyll-redirect-from
+  - jekyll-paginate
+
