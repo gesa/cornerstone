@@ -41,7 +41,6 @@
     "grunt-contrib-connect": "^0.11.2",
     "grunt-contrib-copy": "^0.8.2",
     "grunt-contrib-less": "^1.4.1",
-    "grunt-contrib-uglify": "^0.11.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-eslint": "^19.0.0",
     "grunt-exorcise": "^2.1.1",
@@ -49,7 +48,8 @@
     "grunt-postcss": "^0.7.2",
     "grunt-stylelint": "^0.7.0",
     "jit-grunt": "^0.9.1",
-    "time-grunt": "^1.4.0"
+    "time-grunt": "^1.4.0",
+    "uglifyify": "^3.0.4"
   },
   "dependencies": {}
 }

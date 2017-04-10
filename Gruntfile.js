@@ -48,12 +48,23 @@ module.exports = function (grunt) {
           debug: true
         },
         debug: true,
-        transform: [
-          ['babelify', {"presets": [["es2015"]]}]
-        ]
       },
-      compile: {
-        files: {'<%= site.dist %>/js/scripts.js': '<%= site.app %>/_js/core.js'}
+      dev: {
+        files: {'<%= site.dist %>/js/scripts.js': '<%= site.app %>/_js/core.js'},
+        options: {
+          transform: [
+            ['babelify', {"presets": [["es2015"]]}]
+          ]
+        }
+      },
+      build: {
+        files: {'<%= site.dist %>/js/scripts.js': '<%= site.app %>/_js/core.js'},
+        options: {
+          transform: [
+            ['babelify', {"presets": [["es2015"]]}],
+            ['uglifyify',]
+          ]
+        }
       }
     },
 
@@ -129,19 +140,6 @@ module.exports = function (grunt) {
       }
     },
 
-    uglify: {
-      options: {
-        sourceMap: true,
-        sourceMapIncludeSources: true,
-        check: 'gzip'
-      },
-      build: {
-        files: {
-          '<%= site.dist %>/js/scripts.js': '<%= site.dist %>/js/scripts.js'
-        }
-      }
-    },
-
     watch: {
       gruntfile: {
         files: ['Gruntfile.js'],
@@ -169,7 +167,7 @@ module.exports = function (grunt) {
         },
         tasks: [
           'eslint:lint',
-          'browserify:compile',
+          'browserify:dev',
           'exorcise'
         ]
       },
@@ -197,9 +195,7 @@ module.exports = function (grunt) {
           ]
         },
         files: {
-          src: [
-            '<%= site.dist %>/**/*.html'
-          ]
+          src: ['<%= site.dist %>/**/*.html']
         }
       }
     },
@@ -208,12 +204,11 @@ module.exports = function (grunt) {
       compile: [
         'copy:images',
         'less:css',
-        'browserify:compile'
       ],
       build: [
-        'postcss:build',
-        'uglify:build',
-        'cachebreaker:deploy'
+        'jekyll:build',
+        'browserify:build',
+        'postcss:build'
       ]
     },
 
@@ -241,6 +236,7 @@ module.exports = function (grunt) {
   grunt.registerTask('dev', [
     'clean:init',
     'jekyll:server',
+    'browserify:dev',
     'concurrent:compile',
     'connect:local',
     'watch'
@@ -248,10 +244,10 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:init',
-    'jekyll:build',
     'concurrent:compile',
+    'concurrent:build',
     'exorcise',
-    'concurrent:build'
+    'cachebreaker:deploy'
   ]);
 
   grunt.registerTask('test', [
