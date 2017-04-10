@@ -22,9 +22,9 @@ module.exports = function (grunt) {
           {
             expand: true,
             dot: true,
-            cwd: '<%= site.app %>',
-            src: ['img/**/*'],
-            dest: '<%= site.dist %>'
+            cwd: '<%= site.app %>/_img',
+            src: ['**/*'],
+            dest: '<%= site.dist %>/img'
           }
         ]
       }
@@ -174,7 +174,7 @@ module.exports = function (grunt) {
         ]
       },
       images: {
-        files: ['<%= site.app %>/img/**/*'],
+        files: ['<%= site.app %>/_img/**/*'],
         tasks: ['copy']
       },
       jekyll: {

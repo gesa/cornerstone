@@ -61,7 +61,6 @@ defaults:
 # Compiling #
 #############
 
-exclude: ['img']
 keep_files: ['img', 'js', 'css']
 
 highlighter: rouge
