@@ -22,7 +22,6 @@
     "start": "grunt",
     "verbose": "grunt dev -vvv",
     "test": "grunt test",
-    "precommit": "grunt precommit",
     "build": "grunt build"
   },
   "devDependencies": {

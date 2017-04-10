@@ -260,12 +260,6 @@ module.exports = function (grunt) {
     'eslint:lint'
   ]);
 
-  grunt.registerTask('precommit', [
-    'jekyll:check',
-    'jsbeautifier:modify',
-    'jshint:all'
-  ]);
-
   grunt.registerTask('default', [
     'dev'
   ]);
