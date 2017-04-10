@@ -89,7 +89,9 @@ module.exports = function (grunt) {
       },
       server: {
         options: {
-          src: '<%= site.app %>'
+          drafts: true,
+          future: true,
+          incremental: true,
         }
       },
       check: {
