@@ -8,9 +8,9 @@
     "url": "gesa/cornerstone"
   },
   "author": {
-    "name": "Aki Rose Braun",
+    "name": "Aki Rose",
     "email": "hi@akiro.se",
-    "website": "https://akibraun.com"
+    "website": "https://akiro.se"
   },
   "engines": {
     "node": ">=7",
