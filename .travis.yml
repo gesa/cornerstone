@@ -1,23 +1,31 @@
 language: node_js
 node_js:
-- '5'
+- node
 sudo: false
 cache:
   bundler: true
   directories:
-    - node_modules
-    - vendor
+  - node_modules
+  - vendor
 before_install:
-  - rvm install `cat .ruby-version`
+- rvm install `cat .ruby-version`
 install:
-  - npm install
+- npm install
 script:
-  - npm run-script build
+- npm run-script build
 env:
-  - CXX=g++-4.8
+- CXX=g++-4.8
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
+    - g++-4.8
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  target_branch: gh-pages
+  local_dir: dist
+  on:
+    branch: production
