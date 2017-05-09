@@ -1,5 +1,7 @@
 # Cornerstone
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/gesa/cornerstone.svg)](https://greenkeeper.io/)
+
 A static site boilerplate that gets out of your way.
 
 ## Customising the site
